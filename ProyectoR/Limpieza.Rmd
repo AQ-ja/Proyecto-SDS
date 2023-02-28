@@ -1,0 +1,170 @@
+---
+title: "Limpieza de datos"
+output: html_document
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Como primer paso debemos de importar el dataset a utilizar
+
+```{r message=FALSE, warning=FALSE}
+
+
+library(dplyr)
+library(tidyr)
+library(ROSE)
+library(randomForest)
+library(caret)
+library(e1071)
+library(corrplot)
+
+#db<-read.csv('datasetSucio.csv')
+
+#saveRDS(db, "db.rds")
+
+db<-readRDS('db.rds')
+
+
+```
+Este dataset pesa mas de 13GB por ende se ha tardado en leer.
+La base de datos cuenta con `r ncol(db)` columnas, las cuales son las siguientes `r names(db)`
+
+
+
+y ademas se tiene una cantidad de `r nrow(db)` filas.
+
+Resumen de la base de datos
+```{r }
+#Convertimos la variable a predecir en factor
+db$Label<-as.factor(db$Label)
+summary(db)
+
+```
+Las variables que tenemos son las siguiente:
+
+***
+
+* IPV4_SRC_ADDR: Es la direccion origen 
+* L4_SRC_PORT: La direccion IPV4 del destino
+* IPV4_DST_ADDR: Numero del puerto de origen
+* L4_DST_PORT: Numero de puerto destino
+* PROTOCOL: Identificador del protocolo
+* L7_PROTO: Numero del protocolo de la capa 7
+* IN_BYTES: Numero entrante de bytes
+* IN_PKTS: Numero entrante de paquetes
+* OUT_BYTES: Numero saliente de bytes
+* OUT_PKTS: Numero saliente de bytes
+* TCP_FLAGS: Acumulativo de todas las banderas de TCP
+* CLIENT_TCP_FLAGS: Acumulativo de todos los indicadores TCP del cliente
+* SERVER_TCP_FLAGS: Acumulativo de todos los indicadores TCP del servidor
+* FLOW_DURATION_MILLISECONDS: Duracion del flujo en segundos
+* DURATION_IN: transmisión del cliente al servidor (mseg)
+* DURATION_OUT:Duración de la transmisión del cliente al servidor (mseg)
+* MIN_TTL: Flujo mínimo TTL
+* MAX_TTL: TTL de flujo máximo
+* LONGEST_FLOW_PKT: Paquete más largo (bytes) del flujo
+* SHORTEST_FLOW_PKT: Paquete más corto (bytes) del flujo
+* MIN_IP_PKT_LEN: Longitud del paquete IP de flujo más pequeño observado
+* MAX_IP_PKT_LEN: Longitud del paquete IP de mayor flujo observado
+* SRC_TO_DST_SECOND_BYTES: Src a dst Bytes/seg
+* DST_TO_SRC_SECOND_BYTES: dst to src bytes/seg
+* RETRANSMITTED_IN_BYTES: Número de bytes de flujo TCP retransmitidos (src->dst)
+* RETRANSMITTED_IN_PKTS: Número de paquetes de flujo TCP retransmitidos (src->dst)
+* RETRANSMITTED_OUT_BYTES: Número de bytes de flujo TCP retransmitidos (dst->src)
+* RETRANSMITTED_OUT_PKTS: Número de paquetes de flujo TCP retransmitidos (dst->src)
+* SRC_TO_DST_AVG_THROUGHPUT: Src a thpt promedio dst (bps)
+* DST_TO_SRC_AVG_THROUGHPUT: DST a thpt promedio de origen (bps)
+* NUM_PKTS_UP_TO_128_BYTES: Paquetes cuyo tamaño de IP <= 128
+* NUM_PKTS_128_TO_256_BYTES: Paquetes cuyo tamaño de IP > 128 y <= 256
+* NUM_PKTS_256_TO_512_BYTES: Paquetes cuyo tamaño de IP > 256 y <= 512
+* NUM_PKTS_512_TO_1024_BYTES: Paquetes cuyo tamaño de IP > 512 y <= 1024
+* NUM_PKTS_1024_TO_1514_BYTES: Paquetes cuyo tamaño de IP > 1024 y <= 1514
+* TCP_WIN_MAX_IN: Ventana máxima de TCP (src->dst)
+* TCP_WIN_MAX_OUT: Ventana máxima de TCP (dst->src)
+* ICMP_TYPE: Tipo ICMP * 256 + código ICMP
+* ICMP_IPV4_TYPE: Tipo ICMP
+* DNS_QUERY_ID: ID de transacción de consulta de DNS
+* DNS_QUERY_TYPE: Tipo de consulta DNS (p. ej., 1=A, 2=NS...)
+* DNS_TTL_ANSWER: FTP_COMMAND_RET_CODE: TTL del primer registro A (si lo hay)
+* Código de retorno del comando del cliente FTP
+* Label: Label
+* Attack: Tipo de etiqueta
+* Dataset: Base de datos origen
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Debemos de ver si los datos se encuentran balanceados de manera correcta
+
+```{r }
+
+barplot(prop.table(table(db$Label)),col=c("orange","blue"),
+        legend.text=c("Ataque","Ataques malignos"))
+
+
+```
+
+Como se observa en la grafica anterior los datos no se encuentran balanceados por ello debemos de balancearlos
+
+```{r }
+
+ataques <- db[db$Label == 0, ]
+ataquesMalignos <- db[db$Label ==1,]
+db<- full_join(ataques,ataquesMalignos[1:(nrow(ataques)),] )
+
+```
+
+Como se observa los datos ya se encuentran balanceados de manera correcta
+
+```{r }
+barplot(prop.table(table(db$Label)),col=c("orange","blue"),
+        legend.text=c("Ataque","Ataques malignos"))
+
+
+```
+
+Removemos la columna de  Dataset, ya que esta solo nos indica de que dataset vino el dato, lo cual no aporta ningun valor a nuestra investigacion.
+Removemos las siguientes columnas ya que los valores que dan en su mayoria son 0, generando datos innecesarios al momento de su prediccion.
+- FTP_COMMAND_RET_CODE
+- DNS_TTL_ANSWER
+- DNS_QUERY_TYPE
+- DNS_QUERY_ID
+- NUM_PKTS_1024_TO_1514_BYTES
+```{r }
+
+df2 <- db[,!names(db) %in% c("Dataset","FTP_COMMAND_RET_CODE","DNS_TTL_ANSWER","DNS_QUERY_ID","NUM_PKTS_1024_TO_1514_BYTES")]
+```
+Generamos un nuevo dataset con los datos limpios
+```{r }
+#saveRDS(df2, "dbLimpios.rds")
+
+```
