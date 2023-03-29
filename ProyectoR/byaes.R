@@ -1,0 +1,7 @@
+df<-readRDS("dbLimpios.rds")
+ncol(df)
+nrow(df)
+table(df$Label)
+names(df)
+summary(df)
+View(df)

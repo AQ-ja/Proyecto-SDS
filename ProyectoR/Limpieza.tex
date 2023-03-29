@@ -1,0 +1,456 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Limpieza de datos},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Limpieza de datos}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+Como primer paso debemos de importar el dataset a utilizar
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+\FunctionTok{library}\NormalTok{(ROSE)}
+\FunctionTok{library}\NormalTok{(randomForest)}
+\FunctionTok{library}\NormalTok{(caret)}
+\FunctionTok{library}\NormalTok{(e1071)}
+\FunctionTok{library}\NormalTok{(corrplot)}
+
+\CommentTok{\#db\textless{}{-}read.csv(\textquotesingle{}datasetSucio.csv\textquotesingle{})}
+
+\CommentTok{\#saveRDS(db, "db.rds")}
+
+\NormalTok{db}\OtherTok{\textless{}{-}}\FunctionTok{readRDS}\NormalTok{(}\StringTok{\textquotesingle{}db.rds\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Este dataset pesa mas de 13GB por ende se ha tardado en leer. La base de
+datos cuenta con 46 columnas, las cuales son las siguientes
+IPV4\_SRC\_ADDR, L4\_SRC\_PORT, IPV4\_DST\_ADDR, L4\_DST\_PORT,
+PROTOCOL, L7\_PROTO, IN\_BYTES, IN\_PKTS, OUT\_BYTES, OUT\_PKTS,
+TCP\_FLAGS, CLIENT\_TCP\_FLAGS, SERVER\_TCP\_FLAGS,
+FLOW\_DURATION\_MILLISECONDS, DURATION\_IN, DURATION\_OUT, MIN\_TTL,
+MAX\_TTL, LONGEST\_FLOW\_PKT, SHORTEST\_FLOW\_PKT, MIN\_IP\_PKT\_LEN,
+MAX\_IP\_PKT\_LEN, SRC\_TO\_DST\_SECOND\_BYTES,
+DST\_TO\_SRC\_SECOND\_BYTES, RETRANSMITTED\_IN\_BYTES,
+RETRANSMITTED\_IN\_PKTS, RETRANSMITTED\_OUT\_BYTES,
+RETRANSMITTED\_OUT\_PKTS, SRC\_TO\_DST\_AVG\_THROUGHPUT,
+DST\_TO\_SRC\_AVG\_THROUGHPUT, NUM\_PKTS\_UP\_TO\_128\_BYTES,
+NUM\_PKTS\_128\_TO\_256\_BYTES, NUM\_PKTS\_256\_TO\_512\_BYTES,
+NUM\_PKTS\_512\_TO\_1024\_BYTES, NUM\_PKTS\_1024\_TO\_1514\_BYTES,
+TCP\_WIN\_MAX\_IN, TCP\_WIN\_MAX\_OUT, ICMP\_TYPE, ICMP\_IPV4\_TYPE,
+DNS\_QUERY\_ID, DNS\_QUERY\_TYPE, DNS\_TTL\_ANSWER,
+FTP\_COMMAND\_RET\_CODE, Label, Attack, Dataset
+
+y ademas se tiene una cantidad de 75987976 filas.
+
+Resumen de la base de datos
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Convertimos la variable a predecir en factor}
+\NormalTok{db}\SpecialCharTok{$}\NormalTok{Label}\OtherTok{\textless{}{-}}\FunctionTok{as.factor}\NormalTok{(db}\SpecialCharTok{$}\NormalTok{Label)}
+\FunctionTok{summary}\NormalTok{(db)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  IPV4_SRC_ADDR       L4_SRC_PORT    IPV4_DST_ADDR       L4_DST_PORT   
+##  Length:75987976    Min.   :    0   Length:75987976    Min.   :    0  
+##  Class :character   1st Qu.:27291   Class :character   1st Qu.:   80  
+##  Mode  :character   Median :45745   Mode  :character   Median :   80  
+##                     Mean   :40398                      Mean   : 3337  
+##                     3rd Qu.:55042                      3rd Qu.:  443  
+##                     Max.   :65535                      Max.   :65535  
+##     PROTOCOL         L7_PROTO         IN_BYTES            IN_PKTS        
+##  Min.   :  0.00   Min.   :  0.00   Min.   :        1   Min.   :     1.0  
+##  1st Qu.:  6.00   1st Qu.:  0.00   1st Qu.:       56   1st Qu.:     1.0  
+##  Median :  6.00   Median :  7.00   Median :      112   Median :     2.0  
+##  Mean   : 10.25   Mean   : 53.31   Mean   :     1030   Mean   :     9.7  
+##  3rd Qu.: 17.00   3rd Qu.: 91.51   3rd Qu.:      280   3rd Qu.:     3.0  
+##  Max.   :255.00   Max.   :248.00   Max.   :301926201   Max.   :469281.0  
+##    OUT_BYTES            OUT_PKTS          TCP_FLAGS      CLIENT_TCP_FLAGS
+##  Min.   :        0   Min.   :     0.0   Min.   :  0.00   Min.   :  0.00  
+##  1st Qu.:        0   1st Qu.:     0.0   1st Qu.:  0.00   1st Qu.:  0.00  
+##  Median :        0   Median :     0.0   Median :  2.00   Median :  2.00  
+##  Mean   :     3116   Mean   :     4.7   Mean   : 24.17   Mean   : 22.16  
+##  3rd Qu.:      152   3rd Qu.:     1.0   3rd Qu.: 22.00   3rd Qu.:  6.00  
+##  Max.   :275639781   Max.   :410903.0   Max.   :223.00   Max.   :223.00  
+##  SERVER_TCP_FLAGS  FLOW_DURATION_MILLISECONDS  DURATION_IN      
+##  Min.   :  0.000   Min.   :      0            Min.   :     0.0  
+##  1st Qu.:  0.000   1st Qu.:      0            1st Qu.:     0.0  
+##  Median :  0.000   Median :4293061            Median :    21.0  
+##  Mean   :  9.518   Mean   :2315191            Mean   :   533.5  
+##  3rd Qu.: 20.000   3rd Qu.:4294029            3rd Qu.:  1047.0  
+##  Max.   :223.000   Max.   :4294967            Max.   :119574.0  
+##   DURATION_OUT          MIN_TTL          MAX_TTL       LONGEST_FLOW_PKT 
+##  Min.   :     0.00   Min.   :  0.00   Min.   :  0.00   Min.   :   28.0  
+##  1st Qu.:     0.00   1st Qu.:  0.00   1st Qu.:  0.00   1st Qu.:   40.0  
+##  Median :     0.00   Median : 64.00   Median : 64.00   Median :  100.0  
+##  Mean   :    14.83   Mean   : 53.59   Mean   : 53.65   Mean   :  264.9  
+##  3rd Qu.:     0.00   3rd Qu.: 64.00   3rd Qu.: 64.00   3rd Qu.:  140.0  
+##  Max.   :119558.00   Max.   :255.00   Max.   :255.00   Max.   :65535.0  
+##  SHORTEST_FLOW_PKT MIN_IP_PKT_LEN    MAX_IP_PKT_LEN    SRC_TO_DST_SECOND_BYTES
+##  Min.   :  28.00   Min.   :   0.00   Min.   :   28.0   Min.   : 0.000e+00     
+##  1st Qu.:  40.00   1st Qu.:   0.00   1st Qu.:   40.0   1st Qu.: 6.800e+01     
+##  Median :  44.00   Median :   0.00   Median :  100.0   Median : 1.408e+03     
+##  Mean   :  62.78   Mean   :  23.58   Mean   :  264.9   Mean   :2.041e+297     
+##  3rd Qu.:  69.00   3rd Qu.:  40.00   3rd Qu.:  140.0   3rd Qu.: 3.806e+03     
+##  Max.   :3990.00   Max.   :1260.00   Max.   :65535.0   Max.   :8.912e+304     
+##  DST_TO_SRC_SECOND_BYTES RETRANSMITTED_IN_BYTES RETRANSMITTED_IN_PKTS
+##  Min.   : 0.000e+00      Min.   :       0       Min.   :0.00e+00     
+##  1st Qu.: 0.000e+00      1st Qu.:       0       1st Qu.:0.00e+00     
+##  Median : 0.000e+00      Median :       0       Median :0.00e+00     
+##  Mean   :2.464e+249      Mean   :      78       Mean   :3.94e-01     
+##  3rd Qu.: 1.640e+02      3rd Qu.:       0       3rd Qu.:0.00e+00     
+##  Max.   :1.872e+257      Max.   :15120489       Max.   :1.38e+04     
+##  RETRANSMITTED_OUT_BYTES RETRANSMITTED_OUT_PKTS SRC_TO_DST_AVG_THROUGHPUT
+##  Min.   :      0         Min.   :   0.000       Min.   :0.000e+00        
+##  1st Qu.:      0         1st Qu.:   0.000       1st Qu.:2.240e+05        
+##  Median :      0         Median :   0.000       Median :5.200e+05        
+##  Mean   :    568         Mean   :   0.573       Mean   :2.847e+06        
+##  3rd Qu.:      0         3rd Qu.:   0.000       3rd Qu.:1.120e+06        
+##  Max.   :7329139         Max.   :5536.000       Max.   :4.277e+09        
+##  DST_TO_SRC_AVG_THROUGHPUT NUM_PKTS_UP_TO_128_BYTES NUM_PKTS_128_TO_256_BYTES
+##  Min.   :0.000e+00         Min.   :     0.0         Min.   :    0.00         
+##  1st Qu.:0.000e+00         1st Qu.:     1.0         1st Qu.:    0.00         
+##  Median :0.000e+00         Median :     2.0         Median :    0.00         
+##  Mean   :7.206e+06         Mean   :    29.1         Mean   :    0.97         
+##  3rd Qu.:9.120e+05         3rd Qu.:     4.0         3rd Qu.:    2.00         
+##  Max.   :4.294e+09         Max.   :475657.0         Max.   :73465.00         
+##  NUM_PKTS_256_TO_512_BYTES NUM_PKTS_512_TO_1024_BYTES
+##  Min.   :    0.00          Min.   :    0.00          
+##  1st Qu.:    0.00          1st Qu.:    0.00          
+##  Median :    0.00          Median :    0.00          
+##  Mean   :    0.36          Mean   :    0.37          
+##  3rd Qu.:    0.00          3rd Qu.:    0.00          
+##  Max.   :47667.00          Max.   :38812.00          
+##  NUM_PKTS_1024_TO_1514_BYTES TCP_WIN_MAX_IN  TCP_WIN_MAX_OUT   ICMP_TYPE    
+##  Min.   :0.00e+00            Min.   :    0   Min.   :    0   Min.   :    0  
+##  1st Qu.:0.00e+00            1st Qu.:    0   1st Qu.:    0   1st Qu.:    0  
+##  Median :0.00e+00            Median :  512   Median :    0   Median :    0  
+##  Mean   :2.02e+00            Mean   : 6007   Mean   : 8383   Mean   : 3750  
+##  3rd Qu.:0.00e+00            3rd Qu.: 4096   3rd Qu.:    0   3rd Qu.:    0  
+##  Max.   :2.01e+05            Max.   :65535   Max.   :65535   Max.   :65317  
+##  ICMP_IPV4_TYPE    DNS_QUERY_ID   DNS_QUERY_TYPE     DNS_TTL_ANSWER     
+##  Min.   :  0.00   Min.   :    0   Min.   :    0.00   Min.   :0.000e+00  
+##  1st Qu.:  0.00   1st Qu.:    0   1st Qu.:    0.00   1st Qu.:0.000e+00  
+##  Median :  0.00   Median :    0   Median :    0.00   Median :0.000e+00  
+##  Mean   : 14.65   Mean   : 4524   Mean   :    1.41   Mean   :1.987e+04  
+##  3rd Qu.:  0.00   3rd Qu.:    0   3rd Qu.:    0.00   3rd Qu.:0.000e+00  
+##  Max.   :255.00   Max.   :65535   Max.   :55937.00   Max.   :4.295e+09  
+##  FTP_COMMAND_RET_CODE Label           Attack            Dataset         
+##  Min.   :  0.000      0:25165295   Length:75987976    Length:75987976   
+##  1st Qu.:  0.000      1:50822681   Class :character   Class :character  
+##  Median :  0.000                   Mode  :character   Mode  :character  
+##  Mean   :  1.515                                                        
+##  3rd Qu.:  0.000                                                        
+##  Max.   :553.000
+\end{verbatim}
+
+Las variables que tenemos son las siguiente:
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  IPV4\_SRC\_ADDR: Es la direccion origen
+\item
+  L4\_SRC\_PORT: La direccion IPV4 del destino
+\item
+  IPV4\_DST\_ADDR: Numero del puerto de origen
+\item
+  L4\_DST\_PORT: Numero de puerto destino
+\item
+  PROTOCOL: Identificador del protocolo
+\item
+  L7\_PROTO: Numero del protocolo de la capa 7
+\item
+  IN\_BYTES: Numero entrante de bytes
+\item
+  IN\_PKTS: Numero entrante de paquetes
+\item
+  OUT\_BYTES: Numero saliente de bytes
+\item
+  OUT\_PKTS: Numero saliente de bytes
+\item
+  TCP\_FLAGS: Acumulativo de todas las banderas de TCP
+\item
+  CLIENT\_TCP\_FLAGS: Acumulativo de todos los indicadores TCP del
+  cliente
+\item
+  SERVER\_TCP\_FLAGS: Acumulativo de todos los indicadores TCP del
+  servidor
+\item
+  FLOW\_DURATION\_MILLISECONDS: Duracion del flujo en segundos
+\item
+  DURATION\_IN: transmisión del cliente al servidor (mseg)
+\item
+  DURATION\_OUT:Duración de la transmisión del cliente al servidor
+  (mseg)
+\item
+  MIN\_TTL: Flujo mínimo TTL
+\item
+  MAX\_TTL: TTL de flujo máximo
+\item
+  LONGEST\_FLOW\_PKT: Paquete más largo (bytes) del flujo
+\item
+  SHORTEST\_FLOW\_PKT: Paquete más corto (bytes) del flujo
+\item
+  MIN\_IP\_PKT\_LEN: Longitud del paquete IP de flujo más pequeño
+  observado
+\item
+  MAX\_IP\_PKT\_LEN: Longitud del paquete IP de mayor flujo observado
+\item
+  SRC\_TO\_DST\_SECOND\_BYTES: Src a dst Bytes/seg
+\item
+  DST\_TO\_SRC\_SECOND\_BYTES: dst to src bytes/seg
+\item
+  RETRANSMITTED\_IN\_BYTES: Número de bytes de flujo TCP retransmitidos
+  (src-\textgreater dst)
+\item
+  RETRANSMITTED\_IN\_PKTS: Número de paquetes de flujo TCP
+  retransmitidos (src-\textgreater dst)
+\item
+  RETRANSMITTED\_OUT\_BYTES: Número de bytes de flujo TCP retransmitidos
+  (dst-\textgreater src)
+\item
+  RETRANSMITTED\_OUT\_PKTS: Número de paquetes de flujo TCP
+  retransmitidos (dst-\textgreater src)
+\item
+  SRC\_TO\_DST\_AVG\_THROUGHPUT: Src a thpt promedio dst (bps)
+\item
+  DST\_TO\_SRC\_AVG\_THROUGHPUT: DST a thpt promedio de origen (bps)
+\item
+  NUM\_PKTS\_UP\_TO\_128\_BYTES: Paquetes cuyo tamaño de IP \textless=
+  128
+\item
+  NUM\_PKTS\_128\_TO\_256\_BYTES: Paquetes cuyo tamaño de IP
+  \textgreater{} 128 y \textless= 256
+\item
+  NUM\_PKTS\_256\_TO\_512\_BYTES: Paquetes cuyo tamaño de IP
+  \textgreater{} 256 y \textless= 512
+\item
+  NUM\_PKTS\_512\_TO\_1024\_BYTES: Paquetes cuyo tamaño de IP
+  \textgreater{} 512 y \textless= 1024
+\item
+  NUM\_PKTS\_1024\_TO\_1514\_BYTES: Paquetes cuyo tamaño de IP
+  \textgreater{} 1024 y \textless= 1514
+\item
+  TCP\_WIN\_MAX\_IN: Ventana máxima de TCP (src-\textgreater dst)
+\item
+  TCP\_WIN\_MAX\_OUT: Ventana máxima de TCP (dst-\textgreater src)
+\item
+  ICMP\_TYPE: Tipo ICMP * 256 + código ICMP
+\item
+  ICMP\_IPV4\_TYPE: Tipo ICMP
+\item
+  DNS\_QUERY\_ID: ID de transacción de consulta de DNS
+\item
+  DNS\_QUERY\_TYPE: Tipo de consulta DNS (p.~ej., 1=A, 2=NS\ldots)
+\item
+  DNS\_TTL\_ANSWER: FTP\_COMMAND\_RET\_CODE: TTL del primer registro A
+  (si lo hay)
+\item
+  Código de retorno del comando del cliente FTP
+\item
+  Label: Label
+\item
+  Attack: Tipo de etiqueta
+\item
+  Dataset: Base de datos origen
+\end{itemize}
+
+Debemos de ver si los datos se encuentran balanceados de manera correcta
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(db}\SpecialCharTok{$}\NormalTok{Label)),}\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"orange"}\NormalTok{,}\StringTok{"blue"}\NormalTok{),}
+        \AttributeTok{legend.text=}\FunctionTok{c}\NormalTok{(}\StringTok{"Ataque"}\NormalTok{,}\StringTok{"Ataques malignos"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Limpieza_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+Como se observa en la grafica anterior los datos no se encuentran
+balanceados por ello debemos de balancearlos
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ataques }\OtherTok{\textless{}{-}}\NormalTok{ db[db}\SpecialCharTok{$}\NormalTok{Label }\SpecialCharTok{==} \DecValTok{0}\NormalTok{, ]}
+\NormalTok{ataquesMalignos }\OtherTok{\textless{}{-}}\NormalTok{ db[db}\SpecialCharTok{$}\NormalTok{Label }\SpecialCharTok{==}\DecValTok{1}\NormalTok{,]}
+\NormalTok{db}\OtherTok{\textless{}{-}} \FunctionTok{full\_join}\NormalTok{(ataques,ataquesMalignos[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(ataques)),] )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining with `by = join_by(IPV4_SRC_ADDR, L4_SRC_PORT, IPV4_DST_ADDR,
+## L4_DST_PORT, PROTOCOL, L7_PROTO, IN_BYTES, IN_PKTS, OUT_BYTES, OUT_PKTS,
+## TCP_FLAGS, CLIENT_TCP_FLAGS, SERVER_TCP_FLAGS, FLOW_DURATION_MILLISECONDS,
+## DURATION_IN, DURATION_OUT, MIN_TTL, MAX_TTL, LONGEST_FLOW_PKT,
+## SHORTEST_FLOW_PKT, MIN_IP_PKT_LEN, MAX_IP_PKT_LEN, SRC_TO_DST_SECOND_BYTES,
+## DST_TO_SRC_SECOND_BYTES, RETRANSMITTED_IN_BYTES, RETRANSMITTED_IN_PKTS,
+## RETRANSMITTED_OUT_BYTES, RETRANSMITTED_OUT_PKTS, SRC_TO_DST_AVG_THROUGHPUT,
+## DST_TO_SRC_AVG_THROUGHPUT, NUM_PKTS_UP_TO_128_BYTES, NUM_PKTS_128_TO_256_BYTES,
+## NUM_PKTS_256_TO_512_BYTES, NUM_PKTS_512_TO_1024_BYTES,
+## NUM_PKTS_1024_TO_1514_BYTES, TCP_WIN_MAX_IN, TCP_WIN_MAX_OUT, ICMP_TYPE,
+## ICMP_IPV4_TYPE, DNS_QUERY_ID, DNS_QUERY_TYPE, DNS_TTL_ANSWER,
+## FTP_COMMAND_RET_CODE, Label, Attack, Dataset)`
+\end{verbatim}
+
+Como se observa los datos ya se encuentran balanceados de manera
+correcta
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(db}\SpecialCharTok{$}\NormalTok{Label)),}\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"orange"}\NormalTok{,}\StringTok{"blue"}\NormalTok{),}
+        \AttributeTok{legend.text=}\FunctionTok{c}\NormalTok{(}\StringTok{"Ataque"}\NormalTok{,}\StringTok{"Ataques malignos"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Limpieza_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+Removemos la columna de Dataset, ya que esta solo nos indica de que
+dataset vino el dato, lo cual no aporta ningun valor a nuestra
+investigacion. Removemos las siguientes columnas ya que los valores que
+dan en su mayoria son 0, generando datos innecesarios al momento de su
+prediccion.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  FTP\_COMMAND\_RET\_CODE
+\item
+  DNS\_TTL\_ANSWER
+\item
+  DNS\_QUERY\_TYPE
+\item
+  DNS\_QUERY\_ID
+\item
+  NUM\_PKTS\_1024\_TO\_1514\_BYTES
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df2 }\OtherTok{\textless{}{-}}\NormalTok{ db[,}\SpecialCharTok{!}\FunctionTok{names}\NormalTok{(db) }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Dataset"}\NormalTok{,}\StringTok{"FTP\_COMMAND\_RET\_CODE"}\NormalTok{,}\StringTok{"DNS\_TTL\_ANSWER"}\NormalTok{,}\StringTok{"DNS\_QUERY\_ID"}\NormalTok{,}\StringTok{"NUM\_PKTS\_1024\_TO\_1514\_BYTES"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+Generamos un nuevo dataset con los datos limpios
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#saveRDS(df2, "dbLimpios.rds")}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
