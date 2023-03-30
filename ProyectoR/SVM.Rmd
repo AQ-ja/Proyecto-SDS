@@ -1,6 +1,6 @@
 ---
-title: "Bayes o SVM"
-author: "Marco Ramírez"
+title: "Bayes y/o SVM"
+author: "Grupo 6"
 date: "2023-03-27"
 output: html_document
 ---
@@ -21,23 +21,25 @@ db<-readRDS('dbLimpios.rds')
 head(db,5)
 
 ```
-***
+
 La base de datos cuenta con *`r ncol(db)`* columnnas y *`r nrow(db)`* filas. Sin embargo, con este modelo el objetivo es determinar el tipo de ataque, si es benigno o no. Para ello podemos comprobar si los datos se encuentran balanceados. 
 
 ```{r }
 barplot(prop.table(table(db$Label)),col=c("orange","blue"),
         legend.text=c("Ataque","Ataques malignos"))
 ```
-***
+
 Como se observa en la grafica anterior los datos se encuentran debidamente balanceados, ahora veremos que columnas nos son de utilidad. 
 
-Para verificar que columnas podemos usar, existe el metodo de determinar la correlacion entre la variable a predecir con otras columnas, donde si se obtiene una correlacion positiva significa que esa columna tienda a crecer junto con la variable de ataque. 
+Para verificar que columnas podemos usar, existe el metodo de determinar la correlacion entre la variable a predecir con otras columnas, donde si se obtiene una correlacion positiva significa que esa columna tienda a crecer junto con la variable de ataque.
+
 ```{r }
 db$Label<-as.numeric(db$Label)
 cor(db$L4_SRC_PORT,db$Label)
 ```
-***
+
 Como se observa la columna de L4_SRC_PORT no fue una buena variable a comparar debido que obtuvo un resultado negativo.
+
 ```{r }
 # cor(db$L4_DST_PORT,db$Label)
 # cor(db$PROTOCOL,db$Label)
@@ -51,7 +53,7 @@ for (i in colnames(df)){
   print(cor(df[[i]],db$Label))
 }
 ```
-***
+
 Tras obtener la correlacion con todas las variables se determino que las variables mas aceptables son, DST_TO_SRC_SECOND_BYTES,SHORTEST_FLOW_PKT, MAX_TTL,PROTOCOL,L7_PROTO,FLOW_DURATION_MILLISECONDS, DURATION_IN, DURATION_OUT y MIN_TTL. En base esto crearemos un nuevo dataframe para deteminar si el modelo es capaz de predicir el tipo de ataque. 
 
 ```{r }
@@ -60,6 +62,7 @@ data<-db[,c("DST_TO_SRC_SECOND_BYTES","SHORTEST_FLOW_PKT","MAX_TTL","PROTOCOL","
 data$Label<-as.factor(data$Label)
 str(data)
 ```
+
 #### Prediccion usando SVM
 
 ```{r}
@@ -78,7 +81,7 @@ modelosvm<-svm(Label~., data = train[1:100000, ])
 summary(modelosvm)
 
 ```
-***
+
 #### Precision del modelo SVM
 
 ```{r }
@@ -87,9 +90,7 @@ confusionMatrix(data[1:100000, ]$Label,predi)
 
 ```
 
-
-***
-#### Niave Bayes
+#### Naive Bayes
 
 ```{r }
 
@@ -101,5 +102,3 @@ cm<-caret::confusionMatrix(as.factor(predBayes),as.factor(test[1:100000, ]$Label
 cm
 
 ```
-
-

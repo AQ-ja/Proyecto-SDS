@@ -1,5 +1,6 @@
 ---
 title: "Limpieza de datos"
+author: "Grupo 6"
 output:
   pdf_document: default
   html_document: default
@@ -9,7 +10,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Como primer paso debemos de importar el dataset a utilizar
+Como primer paso debemos de importar el dataset a utilizar.
 
 ```{r message=FALSE, warning=FALSE}
 
@@ -30,23 +31,23 @@ db<-readRDS('db.rds')
 
 
 ```
+
 Este dataset pesa mas de 13GB por ende se ha tardado en leer.
 La base de datos cuenta con `r ncol(db)` columnas, las cuales son las siguientes `r names(db)`
 
-
-
 y ademas se tiene una cantidad de `r nrow(db)` filas.
 
-Resumen de la base de datos
+Resumen de la base de datos.
+
 ```{r }
 #Convertimos la variable a predecir en factor
 db$Label<-as.factor(db$Label)
 summary(db)
 
 ```
+
 Las variables que tenemos son las siguiente:
 
-***
 
 * IPV4_SRC_ADDR: Es la direccion origen 
 * L4_SRC_PORT: La direccion IPV4 del destino
@@ -96,35 +97,7 @@ Las variables que tenemos son las siguiente:
 * Dataset: Base de datos origen
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Debemos de ver si los datos se encuentran balanceados de manera correcta
+Debemos de ver si los datos se encuentran balanceados de manera correcta.
 
 ```{r }
 
@@ -134,7 +107,7 @@ barplot(prop.table(table(db$Label)),col=c("orange","blue"),
 
 ```
 
-Como se observa en la grafica anterior los datos no se encuentran balanceados por ello debemos de balancearlos
+Como se observa en la grafica anterior los datos no se encuentran balanceados por ello debemos de balancearlos.
 
 ```{r }
 
@@ -144,7 +117,7 @@ db<- full_join(ataques,ataquesMalignos[1:(nrow(ataques)),] )
 
 ```
 
-Como se observa los datos ya se encuentran balanceados de manera correcta
+Como se observa los datos ya se encuentran balanceados de manera correcta.
 
 ```{r }
 barplot(prop.table(table(db$Label)),col=c("orange","blue"),
@@ -156,18 +129,20 @@ barplot(prop.table(table(db$Label)),col=c("orange","blue"),
 Removemos la columna de  Dataset, ya que esta solo nos indica de que dataset vino el dato, lo cual no aporta ningun valor a nuestra investigacion.
 Removemos las siguientes columnas ya que los valores que dan en su mayoria son 0, generando datos innecesarios al momento de su prediccion.
 
-***
 
 * FTP_COMMAND_RET_CODE
 * DNS_TTL_ANSWER
 * DNS_QUERY_TYPE
 * DNS_QUERY_ID
 * NUM_PKTS_1024_TO_1514_BYTES
+
 ```{r }
 
 df2 <- db[,!names(db) %in% c("Dataset","FTP_COMMAND_RET_CODE","DNS_TTL_ANSWER","DNS_QUERY_ID","NUM_PKTS_1024_TO_1514_BYTES")]
 ```
-Generamos un nuevo dataset con los datos limpios
+
+Generamos un nuevo dataset con los datos limpios.
+
 ```{r }
 #saveRDS(df2, "dbLimpios.rds")
 
