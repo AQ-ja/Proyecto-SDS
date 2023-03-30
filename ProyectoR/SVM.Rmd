@@ -90,6 +90,8 @@ confusionMatrix(data[1:100000, ]$Label,predi)
 
 ```
 
+Se logró una exactitud del 50% aproximaamente, lo que indica que 1 de cada 2 casos predice el tipo de ataque de forma correcta.
+
 #### Naive Bayes
 
 ```{r }
@@ -102,3 +104,5 @@ cm<-caret::confusionMatrix(as.factor(predBayes),as.factor(test[1:100000, ]$Label
 cm
 
 ```
+
+Con Naive Bayes, el porcentaje de exactitud mejora significativamente a un 54%.
