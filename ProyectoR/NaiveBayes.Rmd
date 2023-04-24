@@ -67,57 +67,74 @@ data<-data[sample(1:nrow(data)), ]
 
 
 ```{r }
+data<-data[1:1000000,]
+table(data$Label)
 
-# Separación de los datos
-set.seed(123)
-train_index <- sample(seq_len(nrow(data)), size = floor(0.55 * nrow(data)), replace = FALSE)
-train_data <- data[train_index,]
-temp_data <- data[-train_index,]
-validation_index <- sample(seq_len(nrow(temp_data)), size = floor(0.15 * nrow(data)), replace = FALSE)
-validation_data <- temp_data[validation_index,]
-test_data <- temp_data[-validation_index,]
-
-
-# Modelos Naive Bayes y SVM
-library(e1071)
-library(caret)
-set.seed(123)
-model_nb <- naiveBayes(Label ~ ., data = train_data)
-model_nb
-#model_svm <- svm(Label ~ ., data = train_data)
-
-
-# Predicción en datos de validación
-prediction_nb_val <- predict(model_nb, newdata = validation_data[,-10])
-prediction_nb_val
-#prediction_svm_val <- predict(model_svm, newdata = validation_data[,-10])
-
-# Métricas de evaluación para datos de validación
-metrics_nb_val <- confusionMatrix(prediction_nb_val, validation_data$Label)
-metrics_nb_val
-#metrics_svm_val <- confusionMatrix(prediction_svm_val, validation_data$Label)
-
-# Predicción en datos de prueba
-prediction_nb_test <- predict(model_nb, newdata = test_data[,-10])
-#prediction_svm_test <- predict(model_svm, newdata = test_data[,-10])
-
-# Métricas de evaluación para datos de prueba
-metrics_nb_test <- confusionMatrix(prediction_nb_test, test_data$Label)
-metrics_nb_test
-#metrics_svm_test <- confusionMatrix(prediction_svm_test, test_data$Label)
-
-# Evaluación cruzada con K-10 folds
-set.seed(123)
-nb_kfold <- train(Label ~ ., data = data, method = "nb", trControl = trainControl(method = "cv", number = 10))
-nb_kfold
-#svm_kfold <- train(Label ~ ., data = data, method = "svmRadial", trControl = trainControl(method = "cv", number = 10))
-
-# Métricas de evaluación para K-10 folds
-metrics_nb_kfold <- nb_kfold$results[5]
-metrics_nb_kfold
-#metrics_svm_kfold <- svm_kfold$results[5]
+# Separación de datos (55% entrenamiento, 15% validación y 30% pruebas)
+set.seed(123) # Para reproducibilidad
+trainIndex <- createDataPartition(data$Label, p = 0.55, list = FALSE)
+train <- data[trainIndex,]
+temp <- data[-trainIndex,]
+validationIndex <- createDataPartition(temp$Label, p = 0.15, list = FALSE)
+validation <- temp[validationIndex,]
+test <- temp[-validationIndex,]
 
 ```
+
+```{r}
+
+# Evaluación cruzada con K-10 folds para K = 10
+set.seed(123) # Para reproducibilidad
+folds <- createFolds(train$Label, k = 10)
+summary(folds)
+
+```
+
+```{r}
+# SVM
+modelosvm <- svm(Label~., data = train)
+summary(modelosvm)
+```
+
+```{r}
+
+# Métricas de evaluación para SVM
+predi<-predict(modelosvm, test)
+cm_svm <- confusionMatrix(as.factor(predi), as.factor(test$Label))
+cm_svm
+acc_svm <- cm_svm$overall['Accuracy']
+acc_svm
+precision_svm <- cm_svm$byClass['Precision']
+precision_svm
+recall_svm <- cm_svm$byClass['Recall']
+recall_svm
+f1_svm <- cm_svm$byClass['F1']
+f1_svm
+```
+
+```{r}
+
+# Naive Bayes
+modelo_nb <- naiveBayes(Label~., data=train)
+
+```
+
+```{r}
+
+# Métricas de evaluación para Naive Bayes
+pred_nb <- predict(modelo_nb, newdata = validation)
+cm_nb <- confusionMatrix(as.factor(pred_nb), as.factor(validation$Label))
+cm_nb
+acc_nb <- cm_nb$overall['Accuracy']
+acc_nb
+precision_nb <- cm_nb$byClass['Precision']
+precision_nb
+recall_nb <- cm_nb$byClass['Recall']
+recall_nb
+f1_nb <- cm_nb$byClass['F1']
+f1_nb
+```
+
 
 
 

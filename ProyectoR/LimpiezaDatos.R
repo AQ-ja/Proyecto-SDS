@@ -6,11 +6,11 @@ library(caret)
 library(e1071)
 library(corrplot)
 
-#db<-read.csv('datasetSucio.csv')
+db<-read.csv('datasetSucio.csv')
 
 #saveRDS(db, "db.rds")
 
-db<-readRDS('db.rds')
+#db<-readRDS('db.rds')
 
 nrow(db)
 ncol(db)

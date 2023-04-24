@@ -77,7 +77,7 @@ corte <- sample(nrow(data),nrow(data)*porcentaje)
 train<-data[corte,]
 test<-data[-corte,]
 
-modelosvm<-svm(Label~., data = train[1:100000, ])
+modelosvm<-svm(Label~., data = train)
 summary(modelosvm)
 
 ```
@@ -85,8 +85,8 @@ summary(modelosvm)
 #### Precision del modelo SVM
 
 ```{r }
-predi<-predict(modelosvm,test[1:100000, ])
-confusionMatrix(data[1:100000, ]$Label,predi)
+predi<-predict(modelosvm,test)
+confusionMatrix(data$Label,predi)
 
 ```
 
@@ -97,10 +97,10 @@ Se logró una exactitud del 50% aproximaamente, lo que indica que 1 de cada 2 ca
 ```{r }
 
 #Entrenar el modelo
-modelo<-naiveBayes(Label~., data=train[1:100000, ])
+modelo<-naiveBayes(Label~., data=train)
 #Realizamos la prediccion
-predBayes<-predict(modelo, newdata =test[1:100000, ])
-cm<-caret::confusionMatrix(as.factor(predBayes),as.factor(test[1:100000, ]$Label))
+predBayes<-predict(modelo, newdata =test)
+cm<-caret::confusionMatrix(as.factor(predBayes),as.factor(test$Label))
 cm
 
 ```
