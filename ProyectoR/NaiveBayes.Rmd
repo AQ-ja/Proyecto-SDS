@@ -122,8 +122,8 @@ modelo_nb <- naiveBayes(Label~., data=train)
 ```{r}
 
 # Métricas de evaluación para Naive Bayes
-pred_nb <- predict(modelo_nb, newdata = validation)
-cm_nb <- confusionMatrix(as.factor(pred_nb), as.factor(validation$Label))
+pred_nb <- predict(modelo_nb, newdata = test)
+cm_nb <- confusionMatrix(as.factor(pred_nb), as.factor(test$Label))
 cm_nb
 acc_nb <- cm_nb$overall['Accuracy']
 acc_nb

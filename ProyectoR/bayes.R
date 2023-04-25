@@ -18,7 +18,7 @@ str(data)
 
 #Shuffle data
 data<-data[sample(1:nrow(data)), ]
-data<-data[1:1000000,]
+data<-data[1:500000,]
 table(data$Label)
 
 # Separación de datos (55% entrenamiento, 15% validación y 30% pruebas)
@@ -55,8 +55,8 @@ f1_svm
 modelo_nb <- naiveBayes(Label~., data=train)
 
 # Métricas de evaluación para Naive Bayes
-pred_nb <- predict(modelo_nb, newdata = validation)
-cm_nb <- confusionMatrix(as.factor(pred_nb), as.factor(validation$Label))
+pred_nb <- predict(modelo_nb, newdata = test)
+cm_nb <- confusionMatrix(as.factor(pred_nb), as.factor(test$Label))
 cm_nb
 acc_nb <- cm_nb$overall['Accuracy']
 acc_nb
